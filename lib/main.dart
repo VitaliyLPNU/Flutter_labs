@@ -29,18 +29,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Варіанти вибору
+
   final List<String> choices = ['Rock', 'Paper', 'Scissors'];
   String? userChoice;
   String? computerChoice;
   String resultMessage = 'Make your move!';
 
-  // Випадковий вибір комп'ютера
+  
   void _makeComputerChoice() {
     computerChoice = choices[Random().nextInt(3)];
   }
 
-  // Визначення переможця
+
   void _determineWinner() {
     if (userChoice == computerChoice) {
       resultMessage = 'It\'s a Draw!';
@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // Обробка вибору користувача
+ 
   void _onUserChoice(String choice) {
     setState(() {
       userChoice = choice;
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 20),
-            // Кнопки для вибору користувача
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: choices.map((choice) {
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }).toList(),
             ),
             const SizedBox(height: 30),
-            // Відображення результатів
+
             Text(
               'You chose: ${userChoice ?? 'None'}',
               style: Theme.of(context).textTheme.headlineSmall,
