@@ -10,7 +10,8 @@ analyzer:
     dead_code: error
     unused_import: error
     unused_element: ignore
-
+    inference_failure_on_instance_creation: ignore
+    library_private_types_in_public_api: ignore
 linter:
   rules:
     - always_use_package_imports

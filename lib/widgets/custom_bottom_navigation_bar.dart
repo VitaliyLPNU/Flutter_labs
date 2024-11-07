@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:lab2/config/responsive_config.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -13,7 +12,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   });
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: [
         BottomNavigationBarItem(
@@ -25,11 +24,11 @@ Widget build(BuildContext context) {
             Icons.fitness_center,
             size: ResponsiveConfig.iconSize(context),
           ),
-          label: 'Exercises',
+          label: 'Training',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person, size: ResponsiveConfig.iconSize(context)),
-          label: 'Profile',
+          label: 'Me',
         ),
       ],
       currentIndex: selectedIndex,
