@@ -24,11 +24,46 @@ class _RegistrationPageState extends State<RegistrationPage> {
       await prefs.setString('userEmail', _emailController.text);
       await prefs.setString('userPassword', _passwordController.text);
       
-      // Перевірка на mounted перед навігацією
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, '/login');
-      }
+      // Показуємо модальне вікно про успішну реєстрацію
+      _showRegistrationSuccessDialog();
     }
+  }
+
+  void _showRegistrationSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Registration Successful'),
+        content: const Text('You have successfully registered. Please log in.'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.pushReplacementNamed(context, '/login');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showRegistrationFailedDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Registration Failed'),
+        content: const Text('Registration failed. Please try again.'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override

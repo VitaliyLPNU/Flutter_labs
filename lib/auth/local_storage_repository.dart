@@ -24,7 +24,9 @@ class LocalStorageRepository implements StorageRepository {
 
   @override
   Future<void> clearUserData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+     final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('name');
+    await prefs.remove('email');
+    await prefs.remove('password');
   }
 }

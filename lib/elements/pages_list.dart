@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lab2/auth/local_storage_repository.dart';
 import 'package:lab2/config/responsive_config.dart';
 import 'package:lab2/pages/training_page.dart';
-import 'package:shared_preferences/shared_preferences.dart'; 
+import 'package:shared_preferences/shared_preferences.dart';  // імпортуємо необхідний віджет
 
 List<Widget> pagesList(BuildContext context) {
   final contentFontSize = ResponsiveConfig.contentFontSize(context);
@@ -10,7 +11,7 @@ List<Widget> pagesList(BuildContext context) {
     Center(
       child: Text('Home', style: TextStyle(fontSize: contentFontSize)),
     ),
-     const TrainingPage(),
+    const TrainingPage(),
     const UserProfileContent(), // Переносимо контент для "Me" у новий віджет
   ];
 }
@@ -23,6 +24,40 @@ class UserProfileContent extends StatelessWidget {
     final name = prefs.getString('userName') ?? 'Unknown';
     final email = prefs.getString('loggedInUserEmail') ?? 'Unknown';
     return {'name': name, 'email': email};
+  }
+
+  // Метод для розлогінювання
+  Future<void> _logout(BuildContext context) async {
+    final storageRepository = LocalStorageRepository();
+  await storageRepository.clearUserData(); // Видалити лише дані сесії
+
+    // Перехід на сторінку логіну
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
+  // Діалог для підтвердження розлогінювання
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Log out'),
+        content: const Text('Are you sure you want to log out?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Закрити діалог
+            },
+          ),
+          TextButton(
+            child: const Text('Log out'),
+            onPressed: () {
+              _logout(context); // Виконати розлогінювання
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -72,6 +107,14 @@ class UserProfileContent extends StatelessWidget {
                         style: TextStyle(
                           fontSize: fontSizeEmail,
                         ),
+                      ),
+                      SizedBox(height: spacing),
+                      // Додаємо кнопку для розлогінювання
+                      ElevatedButton(
+                        onPressed: () {
+                          _showLogoutDialog(context); // Показати діалог
+                        },
+                        child: const Text('Log out'),
                       ),
                     ],
                   ),

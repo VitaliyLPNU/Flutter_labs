@@ -63,7 +63,7 @@ Future<void> _loadTrainings() async {
       'exercises': <Map<String, dynamic>>[],
     };
     setState(() {
-      trainings.add(newTraining);
+      trainings.add(newTraining); 
       _trainingNameController.clear();
     });
     _saveTrainings();
