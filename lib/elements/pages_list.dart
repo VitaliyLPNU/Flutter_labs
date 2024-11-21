@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lab2/auth/local_storage_repository.dart';
 import 'package:lab2/config/responsive_config.dart';
+import 'package:lab2/pages/home_page.dart';
 import 'package:lab2/pages/training_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';  // імпортуємо необхідний віджет
 
 List<Widget> pagesList(BuildContext context) {
-  final contentFontSize = ResponsiveConfig.contentFontSize(context);
+  ResponsiveConfig.contentFontSize(context);
 
   return [
-    Center(
-      child: Text('Home', style: TextStyle(fontSize: contentFontSize)),
-    ),
+    const HomePage(),
     const TrainingPage(),
     const UserProfileContent(), // Переносимо контент для "Me" у новий віджет
   ];
